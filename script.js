@@ -9,7 +9,7 @@
 // var width = hexSide * 1.5;
 
 // If thinking of rectangle width, define it:
-var width = 640;
+var width = 64;
 var hexSide = width / 1.5;
 var height = hexSide * Math.sqrt(3) / 2;
 
@@ -21,8 +21,8 @@ var mainColor = "#000066";
 var background = "#FFFFFF";
 
 var svg = d3.select("div").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", width*10)
+        .attr("height", height*10);
 
 var drawLogo = function(selection) {
     var origin = selection.append("g")
@@ -70,4 +70,12 @@ var drawLogo = function(selection) {
         .attr("fill", mainColor);
 };
 
-drawLogo(svg);
+for (var x=0; x < 10; x++) {
+    for (var y=0; y < 10; y++) {
+        if ((x+y) % 2 === 0) {
+            var g = svg.append("g")
+                    .translate([x * width, y * height]);
+            drawLogo(g);
+        }
+    }
+}
