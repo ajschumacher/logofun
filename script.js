@@ -9,22 +9,19 @@
 // var width = hexSide * 1.5;
 
 // If thinking of rectangle width, define it:
-var width = 64;
-var hexSide = width / 1.5;
-var height = hexSide * Math.sqrt(3) / 2;
+// var width = 640;
+// var hexSide = width / 1.5;
+// var height = hexSide * Math.sqrt(3) / 2;
 
-var radius = hexSide/6;  // radius of "cell body"
-var clear = hexSide/8;  // width of "synapse"
-var delta = Math.PI / 6;  // radian half-width at circle
+// Define details of circles and so on
+// var radius = hexSide/6;  // radius of "cell body"
+// var clear = hexSide/8;  // width of "synapse"
+// var delta = Math.PI / 6;  // radian half-width at circle
 
 var mainColor = "#000066";
 var background = "#FFFFFF";
 
-var svg = d3.select("div").append("svg")
-        .attr("width", width*10)
-        .attr("height", height*10);
-
-var drawLogo = function(selection) {
+var drawLogo = function(selection, width, height, radius, clear, delta) {
     var origin = selection.append("g")
             .translate([width/2, height/2]);
 
@@ -70,12 +67,36 @@ var drawLogo = function(selection) {
         .attr("fill", mainColor);
 };
 
-for (var x=0; x < 10; x++) {
-    for (var y=0; y < 10; y++) {
+var width = 640;
+var hexSide = width / 1.5;
+var height = hexSide * Math.sqrt(3) / 2;
+var radius = hexSide/6;  // radius of "cell body"
+var clear = hexSide/8;  // width of "synapse"
+var delta = Math.PI / 6;  // radian half-width at circle
+
+var svg = d3.select("body").append("center").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+drawLogo(svg, width, height, radius, clear, delta);
+
+var width = 64;
+var hexSide = width / 1.5;
+var height = hexSide * Math.sqrt(3) / 2;
+var radius = hexSide/6;  // radius of "cell body"
+var clear = hexSide/8;  // width of "synapse"
+var delta = Math.PI / 6;  // radian half-width at circle
+
+var svg = d3.select("body").append("svg")
+        .attr("width", window.innerWidth)
+        .attr("height", height*11);
+
+for (var x=0; x < 40; x++) {
+    for (var y=0; y < 11; y++) {
         if ((x+y) % 2 === 0) {
             var g = svg.append("g")
                     .translate([x * width, y * height]);
-            drawLogo(g);
+            drawLogo(g, width, height, radius, clear, delta);
         }
     }
 }
