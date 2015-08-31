@@ -1,16 +1,26 @@
-var side = 640;  // drawing inside a square
-var height = side;
-var width = side;
-var radius = side/5;  // radius of "cell body"
-var clear = side/20;  // width of "synapse"
-var rise = side/4;  // vertical from midline to vanishing point
+// If thinking of a hexagon, define hexagon side length:
+// var hexSide = 320;
+// var height = hexSide * Math.sqrt(3) / 2;
+// var width = hexSide * 1.5;
+
+// If thinking of rectangle height, define it:
+// var height = 420;
+// var hexSide = height * 2 / Math.sqrt(3);
+// var width = hexSide * 1.5;
+
+// If thinking of rectangle width, define it:
+var width = 640;
+var hexSide = width / 1.5;
+var height = hexSide * Math.sqrt(3) / 2;
+
+var radius = hexSide/6;  // radius of "cell body"
+var clear = hexSide/12;  // width of "synapse"
+var delta = 0.4;  // radian half-width at circle
 
 var mainColor = "#000066";
 var background = "#FFFFFF";
-//var background = "#6666FF";
-//var tempColor = "#6699FF";
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("div").append("svg")
         .attr("width", width)
         .attr("height", height);
 
@@ -42,7 +52,13 @@ mirror = function(first, second, third, f) {
       [-third[0], -third[1]]);
 };
 
-mirror([-radius, 0], [-width / 2, -rise], [0, -radius],
+var theta = Math.atan((height/2) / (width/2));
+var x1 = Math.cos(theta - delta) * radius;
+var y1 = Math.sin(theta - delta) * radius;
+var x2 = Math.cos(theta + delta) * radius;
+var y2 = Math.sin(theta + delta) * radius;
+
+mirror([x1, y1], [width/2, height/2], [x2, y2],
        function(first, second, third) {
            triangle(origin, first, second, third)
                .attr("fill", mainColor);
@@ -55,24 +71,3 @@ origin.append("circle")
 origin.append("circle")
     .attr("r", radius)
     .attr("fill", mainColor);
-
-
-//origin.append("path")
-//    .attr("d", "M 0 0 L " + -(width-30) / 2 + " 0")
-//    .attr("stroke", "red")
-//    .attr("stroke-width", 10);
-
-// d3.tsv("data.tsv", function(error, data) {
-//     var c = d3.conventions();
-//     c.x.domain(d3.extent(data, ƒ('sepalWidth')));
-//     c.y.domain(d3.extent(data, ƒ('sepalLength')));
-
-//     c.drawAxis();
-
-//     c.svg.dataAppend(data, "circle.dot")
-//         .attr("r", 3.5)
-//         .attr("cx", ƒ('sepalWidth', c.x))
-//         .attr("cy", ƒ('sepalLength', c.y))
-//         .style("fill", ƒ('species', c.color))
-//         .call(d3.attachTooltip);
-// });
