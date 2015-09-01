@@ -134,3 +134,37 @@ svg.append("g").translate([width, height])
     .text("DLA")
     .attr("font-size", height + 73)
     .attr("fill", mainColor);
+
+
+var height = 160;
+var hexSide = height * 2 / Math.sqrt(3);
+var width = hexSide * 1.5;
+var radius = hexSide/6;  // radius of "cell body"
+var clear = hexSide/8;  // width of "synapse"
+var delta = Math.PI / 6;  // radian half-width at circle
+
+var svg = d3.select("#deeplearninganalytics").append("svg")
+        .attr("width", width + 420)
+        .attr("height", height + 40);
+
+drawLogo(svg, width, height, radius, clear, delta);
+
+var font = 74;
+
+svg.append("g").translate([width, (height-20)/3])
+    .append("text")
+    .text("Deep")
+    .attr("font-size", font)
+    .attr("fill", mainColor);
+
+svg.append("g").translate([width, 10+2*(height-20)/3])
+    .append("text")
+    .text("Learning")
+    .attr("font-size", font)
+    .attr("fill", mainColor);
+
+svg.append("g").translate([width, height])
+    .append("text")
+    .text("Analytics")
+    .attr("font-size", font)
+    .attr("fill", mainColor);
