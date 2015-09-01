@@ -67,18 +67,18 @@ var drawLogo = function(selection, width, height, radius, clear, delta) {
         .attr("fill", mainColor);
 };
 
-var width = 640;
-var hexSide = width / 1.5;
-var height = hexSide * Math.sqrt(3) / 2;
-var radius = hexSide/6;  // radius of "cell body"
-var clear = hexSide/8;  // width of "synapse"
-var delta = Math.PI / 6;  // radian half-width at circle
+// var width = 640;
+// var hexSide = width / 1.5;
+// var height = hexSide * Math.sqrt(3) / 2;
+// var radius = hexSide/6;  // radius of "cell body"
+// var clear = hexSide/8;  // width of "synapse"
+// var delta = Math.PI / 6;  // radian half-width at circle
 
-var svg = d3.select("body").append("center").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+// var svg = d3.select("body").append("center").append("svg")
+//         .attr("width", width)
+//         .attr("height", height);
 
-drawLogo(svg, width, height, radius, clear, delta);
+// drawLogo(svg, width, height, radius, clear, delta);
 
 var width = 64;
 var hexSide = width / 1.5;
@@ -87,12 +87,12 @@ var radius = hexSide/6;  // radius of "cell body"
 var clear = hexSide/8;  // width of "synapse"
 var delta = Math.PI / 6;  // radian half-width at circle
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#paper").append("svg")
         .attr("width", window.innerWidth)
-        .attr("height", height*11);
+        .attr("height", height*80);
 
 for (var x=0; x < 40; x++) {
-    for (var y=0; y < 11; y++) {
+    for (var y=0; y < 80; y++) {
         if ((x+y) % 2 === 0) {
             var g = svg.append("g")
                     .translate([x * width, y * height]);
@@ -100,3 +100,16 @@ for (var x=0; x < 40; x++) {
         }
     }
 }
+
+var width = 480;
+var hexSide = width / 1.5;
+var height = hexSide * Math.sqrt(3) / 2;
+var radius = hexSide/6;  // radius of "cell body"
+var clear = hexSide/8;  // width of "synapse"
+var delta = Math.PI / 6;  // radian half-width at circle
+
+var svg = d3.select("#big").append("center").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+drawLogo(svg, width, height, radius, clear, delta);
