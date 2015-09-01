@@ -101,6 +101,7 @@ for (var x=0; x < 40; x++) {
     }
 }
 
+
 var width = 480;
 var hexSide = width / 1.5;
 var height = hexSide * Math.sqrt(3) / 2;
@@ -113,3 +114,23 @@ var svg = d3.select("#big").append("center").append("svg")
         .attr("height", height);
 
 drawLogo(svg, width, height, radius, clear, delta);
+
+
+var height = 120;
+var hexSide = height * 2 / Math.sqrt(3);
+var width = hexSide * 1.5;
+var radius = hexSide/6;  // radius of "cell body"
+var clear = hexSide/8;  // width of "synapse"
+var delta = Math.PI / 6;  // radian half-width at circle
+
+var svg = d3.select("#dla").append("svg")
+        .attr("width", width + 320)
+        .attr("height", height);
+
+drawLogo(svg, width, height, radius, clear, delta);
+
+svg.append("g").translate([width, height])
+    .append("text")
+    .text("DLA")
+    .attr("font-size", height + 73)
+    .attr("fill", mainColor);
